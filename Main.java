@@ -20,6 +20,10 @@ public class Main extends Application {
         /// Declaration before loop
         boolean endOfSession = false;
         String userInput;
+        String name = "";
+        int balance = 0;
+        int threshold = 0;
+        int balanceModifier = 0;
 
         // Loop
         while (!endOfSession) {
@@ -37,11 +41,40 @@ public class Main extends Application {
 
             // Processing user input
             switch (userInput) {
+                case "0":
+                    b.printAllAccounts();
+                    break;
+                case "1":
+                    System.out.println("Please enter the name :");
+                    userInput = s.nextLine();
+                    name = userInput;
+                    System.out.println("Please enter the balance :");
+                    userInput = s.nextLine();
+                    balance = Integer.parseInt(userInput);
+                    System.out.println("Please enter the threshold :");
+                    userInput = s.nextLine();
+                    threshold = Integer.parseInt(userInput);
+                    b.createNewAccount(name,balance,threshold);
+                    break;
+                case "2":
+                    System.out.println("Please enter the name of the account");
+                    userInput = s.nextLine();
+                    name = userInput;
+                    System.out.println("Enter the amount you want to add or withdraw of the account");
+                    userInput = s.nextLine();
+                    balance = Integer.parseInt(userInput);
+                    b.changeBalanceByName(name, balance);
+                    break;
+                case "3":
+                    System.out.println("Please enter the name of the account you want to block");
+                    userInput = s.nextLine();
+                    name = userInput;
+                    b.blockAccount(name);
+                    break;
                 case "q":
                     endOfSession = true;
                     b.closeDb();
                     break;
-                // TODO
             }
         }
 
